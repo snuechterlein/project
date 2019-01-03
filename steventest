@@ -1,0 +1,4 @@
+name = "Steven Nuechterlein"
+greeting = "Hey! I am "
+greeting2 = " and it is nice to meet you!"
+print(greeting + name + greeting2)
