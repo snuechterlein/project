@@ -1,0 +1,112 @@
+class User(object):
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+        self.books = {}
+
+    def get_email(self):
+        return self.email
+
+    def change_email(self, address):
+        address = self.email
+        print("The email address has been updated to {}".format(self.email))
+
+    def __repr__(self):
+        return "Username: {}, Email Address: {}, and Number of Books Read: {}".format(self.name, self.email, len(self.books))
+
+    def __eq__(self, other_user):
+        if other_user.name == self.name and other_user.email == self.email:
+            return True
+        else:
+            return False
+
+    def read_book(self, book, rating = None):
+        self.books[book] = rating
+
+    def get_average_rating(self):
+        average = float(sum(self.books.values())) / len(self.books)
+        return average
+
+print(User("Steven", "steven@email.com"))
+
+class Book(object):
+    def __init__(self, title, isbn):
+        self.title = title
+        self.isbn = isbn
+        self.ratings = []
+
+    def get_title(self):
+        return self.title
+
+    def get_isbn(self):
+        return self.isbn
+
+    def set_isbn(self, new_isbn):
+        new_isbn = self.isbn
+        print("The ISBN of the book titled {} has been updated to {}.".format(self.title, self.isbn))
+
+    def add_rating(self, rating):
+        if rating >= 0 and rating <= 4: #return to this method
+            self.ratings.append(rating)
+        else:
+            print("Invalid Rating")
+
+    def __eq__(self, other_book):
+        if other_book.title == self.title and other_book.isbn == self.isbn:
+            return True
+        else:
+            return False
+
+    def get_average_rating(self):
+        average = float(sum(self.ratings.values())) / len(self.ratings)
+        return average
+
+    def __hash__(self):
+        return hash((self.title, self.isbn))
+
+class Fiction(Book):
+    def __init__(self, title, author, isbn):
+        super().__init__(title, isbn)
+        self.author = author
+
+    def get_author(self):
+        return self.author
+
+    def __repr__(self):
+        return "{} by {}".format(self.title, self.author)
+
+class Non_Fiction(Book):
+    def __init__(self, title, subject, level, isbn):
+        super().__init__(title, isbn)
+        self.subject = subject
+        self.level = level
+
+    def get_subject(self):
+        return self.subject
+
+    def get_level(self):
+        return self.level
+
+    def __repr__(self):
+        return "{}, a {} manual on {}.".format(self.title, self.level, self.subject)
+
+class TomeRater(object):
+    def __init__(self):
+        self.users = {}
+        self.books = {}
+
+    def create_book(self, title, isbn):
+        new_book = Book(title, isbn)
+        return new_book
+
+    def create_novel(self, title, author, isbn):
+        new_novel = Fiction(title, author, isbn)
+        return new_novel
+
+    def create_non_fiction(self, title, subject, level, isbn):
+        new_non_fiction = Non_Fiction(title, subject, level, isbn)
+        return new_non_fiction
+
+    #def add_book_to_user(self, book, email, rating = None):
+    #    else:
+        #    print("No user with email {}!".format(self.email))
