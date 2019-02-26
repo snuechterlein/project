@@ -83,7 +83,6 @@ class Book(object):
 class Fiction(Book):
 
     def __init__(self, title, author, isbn):
-
         super().__init__(title, isbn)
         self.author = author
 
@@ -96,7 +95,6 @@ class Fiction(Book):
 class Non_Fiction(Book):
 
     def __init__(self, title, subject, level, isbn):
-
         super().__init__(title, isbn)
         self.subject = subject
         self.level = level
